@@ -9,14 +9,14 @@ def readme():
 
 
 setup(
-    name='pytr',
-    version='0.1.5',
-    description='Use TradeRepublic in terminal',
+    name='pytr_api',
+    version='0.0.1',
+    description='Use TradeRepublic terminal client libraries as API',
     long_description=readme(),
     long_description_content_type='text/markdown',
-    url='https://gitlab.com/marzzzello/pytr/',
-    author='marzzzello',
-    author_email='853485-marzzzello@users.noreply.gitlab.com',
+    url='https://github.com/crs/pytr',
+    author='Christian Spaniol',
+    author_email='christian.spaniol@cpro-iot.com',
     license='MIT',
     packages=['pytr'],
     python_requires='>=3.8',
@@ -37,6 +37,7 @@ setup(
         'requests_futures',
         'shtab',
         'websockets>=10.1',
+        'pandas'
     ],
     classifiers=[
         "License :: OSI Approved :: MIT License",

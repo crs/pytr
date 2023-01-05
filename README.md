@@ -1,6 +1,8 @@
 # pytr: Use TradeRepublic in terminal
 
-This is a library for the private API of the Trade Republic online brokerage. I am not affiliated with Trade Republic Bank GmbH.
+This is fork of a library for the private API of the Trade Republic online brokerage, see `https://github.com/marzzzello/pytr`.
+
+Intention is the possibility to use the API via python code, e.g. to retrieve portfolios for evaluation.
 
 ## Installation
 
@@ -14,9 +16,28 @@ cd pytr
 pip install .
 ```
 
-## Usage
+## Usage of the API client 
 
+We do not want to pair the client, so only web login is supported (see authentication below)
+
+```python
+from pytr.apiclient import TradeRepublicSession
+
+tr = TradeRepublicSession()
+
+if tr.login('+4917670284554', '1141'):
+    code = input()
+    tr.complete_login(code)
+
+tr.update_portfolio()
+tr.get_positions()
+tr.get_info()
+    
 ```
+
+## Usage of the CLI
+
+```python
 $ pytr help
 usage: pytr [-h] [-v {warning,info,debug}] [-V]
             {help,login,dl_docs,portfolio,details,get_price_alarms,set_price_alarms,export_transactions,completion}

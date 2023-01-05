@@ -16,7 +16,7 @@ def get_settings(tr):
         return formatted_json
 
 
-def login(phone_no=None, pin=None, web=True):
+def login(phone_no=None, pin=None, web=True, interactive=True):
     '''
     If web is true, use web login method as else simulate app login.
     Check if credentials file exists else create it.
@@ -48,7 +48,8 @@ def login(phone_no=None, pin=None, web=True):
             pin = input()
 
         print('Save credentials? Type "y" to save credentials:')
-        save = input()
+        
+        save = input() if interactive else 'y'
         if save == 'y':
             with open(CREDENTIALS_FILE, 'w') as f:
                 f.writelines([phone_no + '\n', pin + '\n'])
@@ -74,6 +75,10 @@ def login(phone_no=None, pin=None, web=True):
             request_time = time.time()
             print('Enter the code you received to your mobile app as a notification.')
             print(f'Enter nothing if you want to receive the (same) code as SMS. (Countdown: {countdown})')
+            
+            if not interactive:
+                print("Login incomplete, use tr.complete_weblogin() with your code")
+                return tr
             code = input('Code: ')
             if code == '':
                 countdown = countdown - (time.time() - request_time)
@@ -103,5 +108,5 @@ def login(phone_no=None, pin=None, web=True):
                 exit(1)
 
     log.info('Logged in')
-    # log.debug(get_settings(tr))
+    # log.debug(get_settings(tr))    
     return tr
